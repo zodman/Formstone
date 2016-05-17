@@ -63,6 +63,7 @@
         "dist/js/carousel.js",
         "dist/js/checkbox.js",
         "dist/js/cookie.js",
+        "dist/js/crop.js",
         "dist/js/dropdown.js",
         "dist/js/equalize.js",
         "dist/js/lightbox.js",

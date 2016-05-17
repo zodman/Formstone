@@ -1,0 +1,43 @@
+<style>
+	.cropper {
+		width:  800px;
+		height: 800px;
+
+		background: #eee;
+	}
+
+	.cropper .fs-crop-container {
+		overflow: visible;
+	}
+
+	.cropper .fs-crop-container:after {
+		height: 100%;
+		width: 100%;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+
+		box-shadow: 0 0 0 2px red;
+		content: '';
+		display: block;
+		pointer-events: none;
+	}
+</style>
+
+<script>
+	$(document).ready(function() {
+		$(".js-crop").crop({
+			width:  300,
+			height: 300
+		});
+	})
+</script>
+
+<h4>Basic</h4>
+<div class="cropper js-crop" data-crop-options='{"source":"//spacehold.it/1200x2000/2.jpg"}'></div>
+
+<br>
+
+<div class="cropper js-crop" data-crop-options='{"source":"//spacehold.it/2000x1200/2.jpg"}'></div>

@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 		'dist/css/background.css'    : [ 'src/less/background.less' ],
 		'dist/css/carousel.css'      : [ 'src/less/carousel.less' ],
 		'dist/css/checkbox.css'      : [ 'src/less/checkbox.less' ],
+		'dist/css/crop.css'          : [ 'src/less/crop.less' ],
 		'dist/css/dropdown.css'      : [ 'src/less/dropdown.less' ],
 		'dist/css/lightbox.css'      : [ 'src/less/lightbox.less' ],
 		'dist/css/navigation.css'    : [ 'src/less/navigation.less' ],

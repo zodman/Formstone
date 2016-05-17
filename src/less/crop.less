@@ -1,0 +1,58 @@
+/**
+ * @component
+ * @name Crop
+ */
+
+@import "imports/utils.less";
+
+// Config
+
+/**
+ * @class
+ * @name .fs-crop-element
+ * @type element
+ * @description Target elmement
+ */
+
+/**
+ * @class
+ * @name .fs-crop
+ * @type element
+ * @description Base widget class
+ */
+
+.fs-crop {
+
+	/**
+	 * @class
+	 * @name .fs-crop-enabled
+	 * @type modifier
+	 * @description Indicates enabled state
+	 */
+
+	&&-enabled {
+	}
+
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
+
+	&-container {
+		position: relative;
+
+		overflow: hidden;
+
+		background: #ccc;
+	}
+
+	&-image {
+		position: absolute;
+	}
+}

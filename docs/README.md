@@ -17,6 +17,7 @@
 * [Background](background.md)
 * [Carousel](carousel.md)
 * [Checkbox](checkbox.md)
+* [Crop](crop.md)
 * [Dropdown](dropdown.md)
 * [Equalize](equalize.md)
 * [Lightbox](lightbox.md)
