@@ -131,18 +131,15 @@
 	}
 
 	function onScale(e) {
-		console.log(e);
-
 		var data  = e.data;
 
 		if (data.ready && data.touching) {
-
 			var newWidth    = data.startWidth  * e.scale,
 				newHeight   = data.startHeight * e.scale,
-				diffWidth   = Math.abs( (data.startWidth  - newWidth)  / 2 ),
-				diffHeight  = Math.abs( (data.startHeight - newHeight) / 2 ),
-				newLeft     = data.startLeft + e.deltaX - diffWidth,
-				newTop      = data.startTop  + e.deltaY - diffHeight;
+				diffWidth   = (data.startWidth  - newWidth)  / 2,
+				diffHeight  = (data.startHeight - newHeight) / 2,
+				newLeft     = data.startLeft + e.deltaX + diffWidth,
+				newTop      = data.startTop  + e.deltaY + diffHeight;
 
 			// Size
 			if (newWidth < data.minWidth) {
@@ -158,6 +155,9 @@
 			if (newHeight > data.naturalHeight) {
 				newHeight = data.naturalHeight;
 			}
+
+			data.targetHeight = newHeight;
+			data.targetWidth  = newWidth;
 
 			setMinMax(data);
 
@@ -175,9 +175,6 @@
 			if (newTop > data.maxTop) {
 				newTop = data.maxTop;
 			}
-
-			data.targetHeight = newHeight;
-			data.targetWidth  = newWidth;
 
 			data.targetTop  = newTop;
 			data.targetLeft = newLeft;
@@ -203,12 +200,17 @@
 			});
 		}
 	}
+
 	function setMinMax(data) {
 		data.maxLeft = 0;
 		data.maxTop  = 0;
 
 		data.minLeft = (data.width  - data.targetWidth);
 		data.minTop  = (data.height - data.targetHeight);
+	}
+
+	function getAttributes(data) {
+
 	}
 
 	/**
