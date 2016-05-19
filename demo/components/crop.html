@@ -38,6 +38,12 @@
 					</p>
 					<!-- START: DEMO -->
 					<style>
+					.cropper_wrapper {
+						width: 100%;
+						overflow: hidden;
+						padding: 100px;
+					}
+					
 					.cropper {
 						width: 600px;
 						height: 600px;
@@ -45,11 +51,7 @@
 						margin: 0 auto;
 					}
 					
-					.cropper .fs-crop-container {
-						overflow: visible;
-					}
-					
-					.cropper .fs-crop-container:after {
+					.cropper:after {
 						height: 100%;
 						width: 100%;
 						position: absolute;
@@ -61,23 +63,62 @@
 						display: block;
 						pointer-events: none;
 					}
+					
+					.result {
+						position: relative;
+						transform: scale(0.5);
+					}
+					
+					.result img {
+						display: block;
+					}
+					
+					.result .marker {
+						position: absolute;
+						top: 0;
+						left: 0;
+						z-index: 1;
+						box-shadow: 0 0 0 2px red;
+						display: block;
+						pointer-events: none;
+					}
 					</style>
 
 					<script>
 					$(document).ready(function() {
 						$(".js-crop").crop({
 							width: 300,
-							height: 300
+							height: 200
+						}).on("position", function(e) {
+							$(".result .marker").css({
+								height: e.height,
+								width: e.width,
+								top: Math.abs(e.top),
+								left: Math.abs(e.left)
+							});
 						});
 					})
 					</script>
 
 					<h4>Basic</h4>
-					<div class="cropper js-crop" data-crop-options='{"source":"//spacehold.it/1200x2000/2.jpg"}'></div>
+
+					<div class="cropper_wrapper">
+						<div class="cropper js-crop" data-crop-options='{"source":"//spacehold.it/2000x1200/2.jpg"}'></div>
+					</div>
+
+					<!--
+<div class="cropper_wrapper">
+	<div class="cropper js-crop" data-crop-options='{"source":"//spacehold.it/1200x2000/2.jpg"}'></div>
+</div>
+-->
+
+					<div class="result">
+						<img src="//spacehold.it/2000x1200/2.jpg">
+						<span class="marker"></span>
+					</div>
 
 					<br>
-
-					<div class="cropper js-crop" data-crop-options='{"source":"//spacehold.it/2000x1200/2.jpg"}'></div>
+					<br>
 					<!-- END: DEMO -->
 					<div class="footer">
 						<div class="copyright">

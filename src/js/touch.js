@@ -230,7 +230,7 @@
 			// Pan / Scale
 
 			var fire    = true,
-				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY, data.touches);
 
 			if (data.scale) {
 				if (data.touches && data.touches.length >= 2) {
@@ -324,7 +324,7 @@
 			}
 		}
 
-		var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+		var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY, data.touches);
 
 		$Window.off( [
 			Events.touchMove,
@@ -380,9 +380,10 @@
 	 * @param scale [float] "Scale value"
 	 * @param dx [float] "Delta X value"
 	 * @param dy [float] "Delta Y value"
+	 * @param touches [array] "Touches"
 	 */
 
-	function buildEvent(type, oe, px, py, s, dx, dy, dirx, diry) {
+	function buildEvent(type, oe, px, py, s, dx, dy, dirx, diry, touches) {
 		return $.Event(type, {
 			originalEvent : oe,
 			bubbles       : true,
@@ -392,7 +393,8 @@
 			deltaX        : dx,
 			deltaY        : dy,
 			directionX    : dirx,
-			directionY    : diry
+			directionY    : diry,
+			touches       : touches
 		});
 	}
 

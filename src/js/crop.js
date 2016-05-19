@@ -29,22 +29,27 @@
 
 		var html = "";
 		html += '<div class="' + RawClasses.container + '"></div>';
+		html += '<div class="' + RawClasses.container_copy + '"></div>';
 
 		// Modify DOM
 		data.$el.addClass(data.baseClasses)
 			.append(html);
 
 		// Store plugin data
-		data.$container = data.$el.find(Classes.container);
+		data.$container     = data.$el.find(Classes.container);
+		data.$containerCopy = data.$el.find(Classes.container_copy);
 
-		// Bind events
-		data.$container.css({
+		//
+		data.$el.css({
 			width     : data.width,
 			height    : data.height
-		}).touch({
+		});
+
+		data.$container.touch({
 			pan: true,
 			scale: true
 		});
+
 
 		if (data.source) {
 			loadImage(data, data.source);
@@ -65,11 +70,15 @@
 
 	function loadImage(data, source) {
 		data.$image = $('<img class="' + RawClasses.image + '">');
+		data.$imageCopy = $('<img class="' + RawClasses.image_copy + '">');
 
 		data.$image.on(Events.load, data, onImageLoaded)
 				   .on(Events.error, data, onImageError)
 				   .attr("src", source)
 				   .appendTo(data.$container);
+
+		data.$imageCopy.attr("src", source)
+					   .appendTo(data.$containerCopy);
 	}
 
 	function onImageLoaded(e) {
@@ -127,11 +136,13 @@
 			data.startHeight = data.targetHeight;
 			data.startLeft   = data.targetLeft;
 			data.startTop    = data.targetTop;
+
+			data.currentZoom = data.targetHeight / data.naturalHeight;
 		}
 	}
 
 	function onScale(e) {
-		var data  = e.data;
+		var data = e.data;
 
 		if (data.ready && data.touching) {
 			var newWidth    = data.startWidth  * e.scale,
@@ -161,23 +172,35 @@
 
 			setMinMax(data);
 
-			// Position
-			if (newLeft < data.minLeft) {
-				newLeft = data.minLeft;
-			}
-			if (newLeft > data.maxLeft) {
-				newLeft = data.maxLeft;
-			}
+			// Zoom
+			var newZoom = newHeight / data.startHeight;
 
-			if (newTop < data.minTop) {
-				newTop = data.minTop;
-			}
-			if (newTop > data.maxTop) {
-				newTop = data.maxTop;
-			}
+			// if (e.touches.length === 1 || newZoom !== data.currentZoom) {
+				// Position
+				if (newLeft < data.minLeft) {
+					newLeft = data.minLeft;
+				}
+				if (newLeft > data.maxLeft) {
+					newLeft = data.maxLeft;
+				}
 
-			data.targetTop  = newTop;
-			data.targetLeft = newLeft;
+				if (newTop < data.minTop) {
+					newTop = data.minTop;
+				}
+				if (newTop > data.maxTop) {
+					newTop = data.maxTop;
+				}
+
+				data.targetTop  = newTop;
+				data.targetLeft = newLeft;
+			// }
+
+			data.currentZoom = newZoom;
+
+			data.zoom  = newHeight / data.naturalHeight;
+			data.scale = data.naturalHeight / data.height;
+
+			console.log(data.scale);
 
 			positionImage(data);
 		}
@@ -187,12 +210,30 @@
 		var data = e.data;
 
 		if (data.ready) {
+			console.log(data.targetTop, data.currentZoom);
+
+			var newE = $.Event("position", {
+				bubbles    : true,
+				height     : data.height / data.scale,
+				width      : data.width  / data.scale,
+				top        : data.targetTop  / data.zoom,
+				left       : data.targetLeft / data.zoom
+			});
+
+			data.$el.trigger( newE );
 		}
 	}
 
 	function positionImage(data) {
 		if (data.ready) {
 			data.$image.css({
+				left      : data.targetLeft,
+				top       : data.targetTop,
+				width     : data.targetWidth,
+				height    : data.targetHeight
+			});
+
+			data.$imageCopy.css({
 				left      : data.targetLeft,
 				top       : data.targetTop,
 				width     : data.targetWidth,
@@ -273,7 +314,9 @@
 
 			classes: [
 				"container",
+				"container_copy",
 				"image",
+				"image_copy",
 				"loaded"
 			],
 

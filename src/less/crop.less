@@ -23,6 +23,8 @@
 
 .fs-crop {
 
+	position: relative;
+
 	/**
 	 * @class
 	 * @name .fs-crop-enabled
@@ -31,6 +33,7 @@
 	 */
 
 	&&-enabled {
+
 	}
 
 	&,
@@ -44,15 +47,34 @@
 		user-select: none !important;
 	}
 
-	&-container {
-		position: relative;
+	&-container,
+	&-container_copy {
+		position: absolute;
 
-		overflow: hidden;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 
 		background: #ccc;
 	}
 
-	&-image {
+	&-container {
+		overflow: hidden;
+	}
+
+	&-image,
+	&-image_copy {
 		position: absolute;
+	}
+
+	&-image {
+		z-index: 2;
+	}
+
+	&-image_copy {
+		z-index: 1;
+
+		opacity: 0.25;
 	}
 }
