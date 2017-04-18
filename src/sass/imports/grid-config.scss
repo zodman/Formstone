@@ -1,0 +1,47 @@
+
+	// Variables
+
+	$fs-grid-mixin-only:				false !default;
+
+	$fs-grid-class-container:     		fs-grid !default;
+	$fs-grid-class-row:           		fs-row !default;
+	$fs-grid-class-cell:				fs-cell !default;
+	$fs-grid-class-contained:     		-contained !default;
+	$fs-grid-class-padded:        		-padded !default;
+	$fs-grid-class-centered:      		-centered !default;
+	$fs-grid-class-right:				-right !default;
+
+	$fs-grid-class-all:           		fs-all !default;
+	$fs-grid-class-xs:           		fs-xs !default;
+	$fs-grid-class-sm:        			fs-sm !default;
+	$fs-grid-class-md:        			fs-md !default;
+	$fs-grid-class-lg:       			fs-lg !default;
+	$fs-grid-class-xl:           		fs-xl !default;
+
+	$fs-grid-columns-sm:      			3 !default;
+	$fs-grid-columns-md:      			6 !default;
+	$fs-grid-columns-lg:     			12 !default;
+
+	$fs-grid-gutter:              		1.0416666666666667% !default;
+
+	$fs-grid-width-xs:           		300px !default;
+	$fs-grid-width-sm:        			480px !default;
+	$fs-grid-width-md:        			720px !default;
+	$fs-grid-width-lg:       			960px !default;
+	$fs-grid-width-xl:           		1200px !default;
+
+	$fs-grid-width-break-xs:     		320px !default;
+	$fs-grid-width-break-sm:  			500px !default;
+	$fs-grid-width-break-md:  			740px !default;
+	$fs-grid-width-break-lg: 			980px !default;
+	$fs-grid-width-break-xl:     		1220px !default;
+
+	$fs-grid-mq-max-sm: 				unquote("max-width: ")($fs-grid-width-break-sm - 1px) !default;
+	$fs-grid-mq-max-md: 				unquote("max-width: ")($fs-grid-width-break-md - 1px) !default;
+	$fs-grid-mq-max-lg: 				unquote("max-width: ")($fs-grid-width-break-lg - 1px) !default;
+	$fs-grid-mq-max-xl: 				unquote("max-width: ")($fs-grid-width-break-xl - 1px) !default;
+
+	$fs-grid-mq-min-sm: 				unquote("min-width: ")($fs-grid-width-break-sm) !default;
+	$fs-grid-mq-min-md: 				unquote("min-width: ")($fs-grid-width-break-md) !default;
+	$fs-grid-mq-min-lg: 				unquote("min-width: ")($fs-grid-width-break-lg) !default;
+	$fs-grid-mq-min-xl: 				unquote("min-width: ")($fs-grid-width-break-xl) !default;

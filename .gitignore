@@ -16,3 +16,6 @@ npm-debug.log
 
 /demo/require/
 /demo/_extra/uploads/
+
+
+.sass-cache/

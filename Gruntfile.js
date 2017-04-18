@@ -317,7 +317,18 @@ module.exports = function(grunt) {
 					]
 				}
 			}
-		}
+		},
+        lessToSass: {
+            convert: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/less',
+                    src: ['**/*.less'],
+                    ext: '.scss',
+                    dest: 'src/sass'
+                }]
+            }
+        }
 	});
 
 	// Newer LESS Imports
