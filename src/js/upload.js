@@ -182,9 +182,9 @@
 	 * @param file [object] "Target file"
 	 */
 
-	function abortFile(data, file, error) {
+	function abortFile(data, file, error, jqXHR) {
 		file.error = true;
-		data.$el.trigger(Events.fileError, [ file, error ]);
+		data.$el.trigger(Events.fileError, [ file, error, jqXHR ]);
 
 		if (!data.aborting) {
 			checkQueue(data);
@@ -562,7 +562,7 @@
 						checkQueue(data);
 					},
 					error: function(jqXHR, status, error) {
-						abortFile(data, file, error);
+						abortFile(data, file, error, jqXHR);
 					}
 				});
 			}
